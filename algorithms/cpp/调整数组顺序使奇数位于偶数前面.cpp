@@ -7,11 +7,22 @@
  * Date: 2020-12-26
  * 
  * Summary:
- * 参考快速排序算法的思想，利用两个左右两个指针寻找最左侧的偶数和最右侧的奇数并交换。
- * 左指针从左向右找最左侧的偶数，直到触及右指针。
- * 右指针从右向左找最右侧的奇数，直到触及左指针。
- * 若最左侧偶数在最右侧奇数的左侧，则交换，并继续上述步骤。
- * 若左指针已触及右指针，则结束。
+ * Use the idea of quick sort. We use a left pointer to find the left-most even 
+ * number, a right pointer to find the right-most odd number, and swap them. In 
+ * the end, all the odd numbers are on the left side of all the even numbers.
+ * 1. Use the left pointer to search for the left-most even number from left to 
+ * right, until it reaches the right pointer.
+ * 2. Use the right pointer to search for the right-most odd number from right 
+ * to left, until it reaches the left pointer.
+ * 3. If the left-most even number is on the left side of the right-most 
+ * number, then swap them and repeat from step 1.
+ * 4. If the left pointer has reached the right pointer, then stop.
+ * 参考快速排序算法的思想，利用两个左右两个指针分别寻找最左侧的偶数和最右侧的奇数，并交
+ * 换。最终使得所有奇数在所有偶数前面。
+ * 1. 左指针从左向右找最左侧的偶数，直到触及右指针。
+ * 2. 右指针从右向左找最右侧的奇数，直到触及左指针。
+ * 3. 若最左侧偶数在最右侧奇数的左侧，则交换，并重复步骤1。
+ * 4. 若左指针已触及右指针，则结束。
  ******************************************************************************/
 
 class Solution {
