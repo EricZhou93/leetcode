@@ -91,10 +91,8 @@ private:
         {
             return true;
         }
-        
-        // Recursive case:
-        // 递归情况
 
+        // Recursive case:
         // Mark the current gird.
         // We mark directly on board. So, we don't have to init visited record 
         // for every starting grid. It saves time.
@@ -102,6 +100,7 @@ private:
         // improves spatial locality. 
         // However, if board or word contains characters other than lowercase 
         // and uppercase English letters, we may still need a visited record.
+        // 递归情况：
         // 标记当前单元格。
         // 我们直接在网格board上标记，这样就不需要初始化已访问记录visited，节约时间。
         // 同时，我们不需要来回访问二维网格board和已访问记录visited。这样提高了空间局
