@@ -1,6 +1,8 @@
 /*******************************************************************************
- * Problem: https://leetcode.com/problems/isomorphic-strings/
- * 问题：https://leetcode-cn.com/problems/isomorphic-strings/
+ * Problem: 205. Isomorphic Strings
+ * https://leetcode.com/problems/isomorphic-strings/
+ * 问题：205. 同构字符串
+ * https://leetcode-cn.com/problems/isomorphic-strings/
  * 
  * Authors:  Keren Zhou
  * 

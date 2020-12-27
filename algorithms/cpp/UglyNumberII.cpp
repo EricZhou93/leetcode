@@ -1,7 +1,10 @@
 /*******************************************************************************
- * Problem: https://leetcode.com/problems/ugly-number-ii/
- * 问题：https://leetcode-cn.com/problems/ugly-number-ii/submissions/
- *       https://leetcode-cn.com/problems/chou-shu-lcof/submissions/
+ * Problem: 264. Ugly Number II
+ * https://leetcode.com/problems/ugly-number-ii/
+ * 问题：264. 丑数 II
+ * https://leetcode-cn.com/problems/ugly-number-ii/
+ * 剑指 Offer 49. 丑数
+ * https://leetcode-cn.com/problems/chou-shu-lcof/
  * 
  * Authors:  Keren Zhou
  * 

@@ -1,6 +1,8 @@
 /*******************************************************************************
- * Problem: https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
- * 问题：https://leetcode-cn.com/problems/smallest-range-covering-elements-from-k-lists/
+ * Problem: 632. Smallest Range Covering Elements from K Lists
+ * https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
+ * 问题：632. 最小区间
+ * https://leetcode-cn.com/problems/smallest-range-covering-elements-from-k-lists/
  * 
  * Authors:  Keren Zhou
  * 

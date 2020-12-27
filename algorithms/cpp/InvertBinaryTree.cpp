@@ -1,6 +1,8 @@
 /*******************************************************************************
- * Problem: https://leetcode.com/problems/invert-binary-tree/
- * 问题：https://leetcode-cn.com/problems/invert-binary-tree/
+ * Problem: 226. Invert Binary Tree
+ * https://leetcode.com/problems/invert-binary-tree/
+ * 问题：226. 翻转二叉树
+ * https://leetcode-cn.com/problems/invert-binary-tree/
  * 
  * Authors:  Keren Zhou
  * 
