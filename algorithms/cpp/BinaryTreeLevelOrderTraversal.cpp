@@ -11,21 +11,37 @@
  * Date: 2020-12-27
  * 
  * Summary:
- * We use a modified BFS algorithm to record values on each level respectively. 
- * Values on each have to be store in a independent array. So, we use an even 
- * level queue and an odd level queue to store nodes on the current level and 
- * on the next level respectively.
- * If the current level is even, we pop nodes in even level queue one by one. 
- * For each node, we append its value to value array for this level and append 
- * its children to odd level queue.
- * If the current level is odd, we do the similar thing.
+ * We use modified BFS to record values in each level respectively.
+ * We use only one queue for all nodes. For each level, we record n as the 
+ * number of nodes in the next level. When processing the next level, we only 
+ * pop the first n nodes such that we only process nodes in the current level 
+ * and won't touch nodes in the next level.
  * 
- * 利用BFS分别记录每一层从左到右各节点的值。
- * 由于每一层的值要各自保存在单独的数组中，这里我需要用到两个队列，偶数层队列和奇数层队
- * 列，分别存储这一层的结点和下一层的结点。
- * 若当前行为偶数行，则这一层的结点保存再偶数层队列中。每当从偶数层队列中取出队首节点，
- * 就把它的值记录在本层数值最后，并将其子节点放到奇数层队列末尾。
- * 若当前行为奇数行，同理。
+ * Pseudocode:
+ * 1. Push root to the queue and set n, number of nodes in current level, to 1.
+ * 2. While queue is not empty:
+ *  (1) Pop the first n nodes. For each node:
+ *      a. Record its value.
+ *      b. Push non-null left and right child to the queue, and increase m, the 
+ *         number of non-null children in current level.
+ *  (2) Append values in the current level to the result.
+ *  (3) Set n, number of nodes in current level, to m, the number of non-null 
+ *      children in current level.
+ * 
+ * 用改进的BFS分别记录每一层从左到右各节点的值。
+ * 用一个队列保存所有节点。在处理每一行节点时，记录下一行的节点数n，即当前行的非空子节
+ * 点数。在处理下一行时，只处理队首的n个节点。这样，在处理每一行时，只会处理当前行的结
+ * 点，而不会处理到下一行的结点。
+ * 
+ * 具体算法：
+ * 1.将根节点放入队列，记当前行节点数为n=1。
+ * 2.当队列不为空：
+ *  (1)依次取出队列的前n个节点。对于每个节点：
+ *      a.记录当前节点的值。
+ *      b.依次将非空左子节点和非空右子节点放入队列，并统计当前行非空子节点总数。
+ *  (2)将当前行的值并入结果。
+ *  (3)将当前行非空子节点总数作为下一行的节点数。
+ * 3.输出结果
  ******************************************************************************/
 
 /**
@@ -37,57 +53,68 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution
 {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root)
+    vector<vector<int>> levelOrder(TreeNode *root)
     {
-        vector<vector<int>> result; // Tree node values in level order.
+        vector<vector<int> > result;
         if (root == NULL)
         {
             return result;
         }
-        queue<TreeNode *> nodes[2]; // nodes[0]: nodes on even level. 
-                                    // nodes[1]: nodes on odd level. 
-        TreeNode *curr = NULL;
-        int is_odd = 0; // 0 is for even level and 1 is for odd level. 
-        nodes[is_odd].push(root);
-        while(true)
-        {
-            vector<int> values; // Values on this level.
 
-            // Go through each node on this level.
-            while(!nodes[is_odd].empty())
+        TreeNode *curr; // Node is currently being processed.
+                        // 当前处理的节点。
+        queue<TreeNode *> q; // Node queue for BFS.
+                             // 广搜队列。
+        int curr_width; // Number of nodes in the current level.
+                        // 当前行的节点数。
+        int next_width; // Number of nodes in the next level.
+                        // 下一行的节点数。
+        
+        // Push root node.
+        // 将根节点加入队列。
+        q.push(root);
+        curr_width = 1;
+
+        // BFS.
+        // 广搜。
+        while (!q.empty())
+        {
+            vector<int> values; // Values in the current level.
+                                // 当前行的值。
+            next_width = 0;
+
+            // Only pop nodes in the current level.
+            // 只从队列中取出当前行的节点。
+            for (int i = 0; i < curr_width; i++)
             {
-                curr = nodes[is_odd].front();
-                
+                curr = q.front();
+
                 values.push_back(curr->val);
 
-                // Add children to the queue for next level.
+                // Only push non-null children.
+                // 只将非空子节点加入队列。
                 if (curr->left != NULL)
                 {
-                    nodes[(is_odd + 1) % 2].push(curr->left);
+                    q.push(curr->left);
+                    next_width++;
                 }
                 if (curr->right != NULL)
                 {
-                    nodes[(is_odd + 1) % 2].push(curr->right);
+                    q.push(curr->right);
+                    next_width++;
                 }
 
-                nodes[is_odd].pop();
+                q.pop();
             }
 
-            // If no value on this level, stop.
-            if (values.empty())
-            {
-                break;
-            }
-            else
-            {
-                result.push_back(values);
-            }
+            result.push_back(values);
 
-            // Go to next level.
-            is_odd = (is_odd + 1) % 2;
+            // Go to next level. 
+            curr_width = next_width;
         }
         return result;
     }
